@@ -18,7 +18,11 @@ const appRoutes: Routes = [
   },
 
   {
-    path: 'servers', canActivate: [AuthGuard],component: ServersComponent, children: [
+    path: 'servers',
+    // canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: ServersComponent,
+    children: [
       {path: ':id', component: ServerComponent},
       {path: ':id/edit', component: EditServerComponent},
 
@@ -28,11 +32,12 @@ const appRoutes: Routes = [
   {path: '**', redirectTo: 'not-found'},
 
 ];
+
 @NgModule({
   imports: [
-  RouterModule.forRoot(appRoutes)
-    ],
-  exports:[RouterModule],
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [RouterModule],
 })
 
 export class AppRoutingModule {
